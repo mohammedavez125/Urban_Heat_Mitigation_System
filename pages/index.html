@@ -1,0 +1,682 @@
+<!doctype html>
+
+<html class="scroll-smooth dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Urban Heat Intelligence System | Predict. Visualize. Mitigate.</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#e5e7f6",
+              "on-tertiary-container": "#004050",
+              "surface-container": "#151926",
+              "secondary-dim": "#874cff",
+              "on-surface-variant": "#a7aab9",
+              "outline-variant": "#444854",
+              "secondary-fixed": "#dac9ff",
+              "secondary-fixed-dim": "#ceb9ff",
+              "on-primary-fixed-variant": "#005e64",
+              "on-tertiary-fixed-variant": "#004a5c",
+              "surface-bright": "#262c3c",
+              "on-tertiary-fixed": "#002a35",
+              "on-secondary-fixed": "#41009a",
+              tertiary: "#69daff",
+              "inverse-primary": "#006a71",
+              outline: "#727582",
+              "surface-container-high": "#1a1f2d",
+              "on-surface": "#e5e7f6",
+              "surface-tint": "#8ff5ff",
+              "inverse-on-surface": "#515561",
+              "surface-variant": "#202534",
+              "primary-container": "#00eefc",
+              secondary: "#ac89ff",
+              "on-secondary": "#290067",
+              "tertiary-dim": "#00c0ea",
+              background: "#0a0e18",
+              "on-secondary-container": "#f8f1ff",
+              "primary-fixed": "#00eefc",
+              "primary-dim": "#00deec",
+              "tertiary-container": "#00cffc",
+              "on-tertiary": "#004a5d",
+              "primary-fixed-dim": "#00deec",
+              "on-primary-container": "#005359",
+              "tertiary-fixed-dim": "#00c0ea",
+              "on-primary": "#005d63",
+              "error-container": "#9f0519",
+              error: "#ff716c",
+              "on-secondary-fixed-variant": "#6300e2",
+              "error-dim": "#d7383b",
+              "on-error": "#490006",
+              primary: "#8ff5ff",
+              "surface-container-highest": "#202534",
+              "on-error-container": "#ffa8a3",
+              "tertiary-fixed": "#00cffc",
+              surface: "#0a0e18",
+              "on-primary-fixed": "#003f43",
+              "surface-container-lowest": "#000000",
+              "surface-container-low": "#0f131e",
+              "secondary-container": "#7000ff",
+              "inverse-surface": "#faf8ff",
+              "surface-dim": "#0a0e18",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            fontFamily: {
+              headline: ["Space Grotesk"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0a0e18;
+        color: #e5e7f6;
+        font-family: "Inter", sans-serif;
+      }
+      .font-space-grotesk {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .hero-grid {
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(143, 245, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(143, 245, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 40px 40px;
+      }
+      .glass-panel {
+        background: rgba(32, 37, 52, 0.4);
+        backdrop-filter: blur(16px);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #8ff5ff 0%, #ac89ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .cta-gradient {
+        background: linear-gradient(135deg, #7000ff 0%, #00eefc 100%);
+      }
+    </style>
+  </head>
+  <body
+    class="selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- Top Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-lg flex justify-between items-center px-8 py-4 max-w-full shadow-[0_24px_48px_-12px_rgba(0,240,255,0.08)]"
+    >
+      <div
+        class="text-xl font-bold tracking-tighter text-cyan-400 font-space-grotesk"
+      >
+        AI-Based Urban Heat Intelligence System
+      </div>
+      <a href='https://github.com/Rashid075/Urban_Heat_Mitigation_System'>
+      <button
+            class="bg-surface-container-high px-6 py-2 rounded-md font-bold text-lg border border-outline-variant/20 hover:bg-surface-variant transition-all"
+          >
+            View Code
+          </button>
+          <a/>
+      <a href='http://localhost:8501/'>
+          
+          <button
+            class="cta-gradient text-on-surface px-6 py-2 rounded-md font-bold text-sm tracking-tight hover:scale-105 transition-all duration-300"
+          >
+            Launch App
+          </button>
+          <a/>
+        </nav>
+    <!-- Hero Section -->
+    <section
+      class="relative min-h-screen flex flex-col items-center justify-center pt-24 overflow-hidden"
+    >
+      <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+      <div
+        class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"
+      ></div>
+      <div
+        class="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"
+      ></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1
+          class="text-6xl md:text-8xl font-black font-space-grotesk tracking-tighter mb-6 leading-none"
+        >
+          Predict. Analyze.<br />
+          <span class="gradient-text">Urban Heat Mitigation.</span>
+        </h1>
+        <p
+          class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl mb-10 leading-relaxed"
+        >
+          An AI-powered platform that predicts urban heat intensity using real-time and historical weather data. 
+  Visualize heat hotspots, analyze zone-wise risk, and implement smart mitigation strategies 
+  to build cooler, sustainable cities.
+        </p>
+        <div
+          class="flex flex-col md:flex-row items-center justify-center gap-4"
+        >
+        <a href='#heat'>
+          <button
+            class="cta-gradient px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:shadow-primary/20 transition-all"
+          >
+            Explore Heat Maps
+          </button>
+        </a>
+          <a href='#arch'>
+
+              <button
+              class="bg-surface-container-high px-8 py-4 rounded-md font-bold text-lg border border-outline-variant/20 hover:bg-surface-variant transition-all"
+              >
+              View Architecture
+            </button>
+        </a>
+        </div>
+      </div>
+      <div class="mt-20 w-full max-w-6xl mx-auto px-6">
+        <div class="relative group">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"
+          ></div>
+          <div
+            class="rounded-xl overflow-hidden border border-outline-variant/20 shadow-2xl"
+          >
+            <img
+              class="w-full aspect-video object-cover grayscale-[0.2] contrast-[1.1]"
+              data-alt="Digital twin of a futuristic city with glowing heat map overlays and data visualization interfaces at night"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWq84d9Ajh_XHVJB7OERhTTwzHSphuzjHyss0-acHJJyxL90P70W-YWrieRXVxO5vKhc9sMLH4HFQbLkNsZdSj9c2xOmRjQS3xtNROI3j9SSeBlL9lbwyfwzVoKG95Taj78DRqldQ3VRcF3fqxBc0YwmInJnya6EHSJLJBvJF0KeKh0Qz81nndHmRhhxnuC1lODAYGy1vWC4ROXkuz7TZw_9T5d-0CWK7oNZ6Zq9T4pa4_qFZ27ulAkUHopzfmk8gSV0a5K9wJoVD5"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Problem Stats Section -->
+    <section class="py-24 bg-surface-container-lowest">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row gap-12 items-end mb-16">
+          <div class="flex-1">
+            <h2 class="text-4xl font-bold font-space-grotesk mb-4">
+              The Escalating Crisis
+            </h2>
+            <p class="text-on-surface-variant max-w-xl">
+              Urban heat islands (UHI) amplify global warming effects, creating
+              lethal micro-climates that strain infrastructure and human health.
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <div
+              class="p-6 glass-panel rounded-xl border-t border-outline-variant/30 flex flex-col gap-2"
+            >
+              <span class="text-3xl font-black text-error font-space-grotesk"
+                >+4.5°C</span
+              >
+              <span
+                class="text-xs uppercase tracking-widest text-on-surface-variant"
+                >Avg UHI Intensity</span
+              >
+            </div>
+            <div
+              class="p-6 glass-panel rounded-xl border-t border-outline-variant/30 flex flex-col gap-2"
+            >
+              <span class="text-3xl font-black text-tertiary font-space-grotesk"
+                >1.2B</span
+              >
+              <span
+                class="text-xs uppercase tracking-widest text-on-surface-variant"
+                >At-Risk Population</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="p-8 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant/20 transition-all"
+          >
+            <span class="material-symbols-outlined text-primary mb-4 text-4xl"
+              >medical_services</span
+            >
+            <h3 class="text-xl font-bold mb-3">Health Impact</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              Rising temperatures put immense pressure on urban infrastructure, especially power grids 
+  and transportation systems. By identifying heat hotspots, our platform enables smarter 
+  planning to reduce energy load and improve city resilience.
+            </p>
+          </div>
+          <div
+            class="p-8 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant/20 transition-all"
+          >
+            <span class="material-symbols-outlined text-secondary mb-4 text-4xl"
+              >electric_bolt</span
+            >
+            <h3 class="text-xl font-bold mb-3">Infrastructure Stress</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              Rising temperatures put immense pressure on urban infrastructure, especially power grids 
+  and transportation systems. By identifying heat hotspots, our platform enables smarter 
+  planning to reduce energy load and improve city resilience.
+            </p>
+          </div>
+          <div
+            class="p-8 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant/20 transition-all"
+          >
+            <span class="material-symbols-outlined text-tertiary mb-4 text-4xl"
+              >monetization_on</span
+            >
+            <h3 class="text-xl font-bold mb-3">Economic Loss</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+             Urban heat leads to productivity loss, increased energy costs, and higher healthcare expenses. 
+  Using data-driven insights, our solution helps optimize mitigation strategies and minimize 
+  economic losses in vulnerable regions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Pipeline Visualization -->
+    <section id='arch' class="py-24 relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold font-space-grotesk mb-4">
+            AI-Powered Heat Intelligence Pipeline
+          </h2>
+          <p class="text-on-surface-variant">
+            Transforming raw weather data into actionable urban heat mitigation insights.
+          </p>
+        </div>
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-4 relative"
+        >
+          <!-- Connectors for Desktop -->
+          <div
+            class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent -z-10"
+          ></div>
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center group">
+            <div
+              class="w-16 h-16 rounded-full glass-panel border border-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >cloud_sync</span
+              >
+            </div>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-primary mb-1"
+              >Ingestion</span
+            >
+            <span class="text-on-surface font-medium">Weather APIs</span>
+          </div>
+          <span
+            class="material-symbols-outlined text-outline-variant md:rotate-0 rotate-90"
+            >arrow_forward</span
+          >
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center group">
+            <div
+              class="w-16 h-16 rounded-full glass-panel border border-outline-variant/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-on-surface"
+                >data_thresholding</span
+              >
+            </div>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1"
+              >Processing</span
+            >
+            <span class="text-on-surface font-medium">Feature Eng.</span>
+          </div>
+          <span
+            class="material-symbols-outlined text-outline-variant md:rotate-0 rotate-90"
+            >arrow_forward</span
+          >
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center group">
+            <div
+              class="w-20 h-20 rounded-full glass-panel border-2 border-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(172,137,255,0.2)]"
+            >
+              <span class="material-symbols-outlined text-secondary text-3xl"
+                >psychology</span
+              >
+            </div>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-secondary mb-1"
+              >Inference</span
+            >
+            <span class="text-on-surface font-medium">ML Model</span>
+          </div>
+          <span
+            class="material-symbols-outlined text-outline-variant md:rotate-0 rotate-90"
+            >arrow_forward</span
+          >
+          <!-- Step 4 -->
+          <div class="flex flex-col items-center group">
+            <div
+              class="w-16 h-16 rounded-full glass-panel border border-outline-variant/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-on-surface"
+                >analytics</span
+              >
+            </div>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1"
+              >Output</span
+            >
+            <span class="text-on-surface font-medium">Predictions</span>
+          </div>
+          <span
+            class="material-symbols-outlined text-outline-variant md:rotate-0 rotate-90"
+            >arrow_forward</span
+          >
+          <!-- Step 5 -->
+          <div class="flex flex-col items-center group">
+            <div
+              class="w-16 h-16 rounded-full glass-panel border border-tertiary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-tertiary"
+                >lightbulb</span
+              >
+            </div>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-tertiary mb-1"
+              >Execution</span
+            >
+            <span class="text-on-surface font-medium">Mitigation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Bento Features Grid -->
+    <section class="py-24 bg-surface-container-low">
+      <div class="container mx-auto px-6">
+        <h2 id='heat'
+          class="text-4xl font-bold font-space-grotesk mb-12 text-center md:text-left"
+        >
+          System Capabilities
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-12 grid-rows-2 gap-6 h-auto md:h-[600px]"
+        >
+          <!-- Feature 1: Map -->
+          <div
+            class="md:col-span-8 md:row-span-1 glass-panel rounded-xl overflow-hidden relative border border-outline-variant/10 group"
+          >
+            <div class="absolute top-4 left-4 z-10">
+              <span
+                class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest border border-outline-variant/20"
+                >Real-Time Canvas</span
+              >
+            </div>
+            <img
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
+              data-alt="Infrared heat map visualization of a dense metropolitan area with red and orange zones indicating high temperature"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqieiWGL4R8QZe2vlZcHJziZHeI3Nmfhr5XeCyRAOZVvxREAvgGWGF3IKhzLbKy6J-sAFwN8Xx_C8x7ah3xI1Cz7hnmQ7s7hJo_2KcuZz_ZSPynXSrH9g3GwDnIEtr-Qg5uYYmJND_aQlLwxeKJkzM3ajlzYW3al_bd_jp6cLVzEu7_Xsd2pg2JJyehAWxTdgfZSefh0jRxDCYzUM293A_vFcdX7cfN8sBYhYGOIr1EaHyjhj0QJrjPV4vA-GQNBG74mtT1li1LhgZ"
+            />
+            <div
+              class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-surface to-transparent"
+            >
+              <h4 class="text-xl font-bold">AI-Powered Heat Map</h4>
+              <p class="text-on-surface-variant text-sm">
+                Real-time visualization of urban heat intensity using ML predictions, 
+  highlighting hotspots across different zones.
+              </p>
+            </div>
+          </div>
+          <!-- Feature 2: Zone Analysis -->
+          <div
+            class="md:col-span-4 md:row-span-1 bg-surface-container-high rounded-xl p-8 border border-outline-variant/10"
+          >
+            <span class="material-symbols-outlined text-tertiary mb-4"
+              >grid_view</span
+            >
+            <h4 class="text-xl font-bold mb-2">Zone-Based Analysis</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              Analyze heat patterns across different zones using spatial and temporal data 
+  such as location, time, and environmental conditions for precise insights.
+            </p>
+          </div>
+          <!-- Feature 3: Ranking -->
+          <div
+            class="md:col-span-4 md:row-span-1 bg-surface-container-highest rounded-xl p-8 border border-outline-variant/10"
+          >
+            <span class="material-symbols-outlined text-secondary mb-4"
+              >leaderboard</span
+            >
+            <h4 class="text-xl font-bold mb-2">Heat Risk Prediction</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              ML models evaluate and rank zones based on heat intensity and risk levels, 
+  enabling quick identification of high-priority areas.
+            </p>
+          </div>
+          <!-- Feature 4: Planning -->
+          <div
+            class="md:col-span-8 md:row-span-1 glass-panel rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl -z-10"
+            ></div>
+            <div class="flex flex-col md:flex-row gap-8 items-center h-full">
+              <div class="flex-1">
+                <span class="material-symbols-outlined text-primary mb-4"
+                  >architecture</span
+                >
+                <h4 class="text-xl font-bold mb-2">Smart Mitigation Planning</h4>
+                <p class="text-on-surface-variant text-sm leading-relaxed">
+                  Generate data-driven recommendations such as green cover expansion, 
+  cool roofing, and urban redesign strategies to reduce heat impact.
+                </p>
+              </div>
+              <div
+                class="w-full md:w-48 bg-background/50 rounded-lg p-4 border border-outline-variant/20"
+              >
+                <div class="space-y-3">
+                  <div
+                    class="h-2 w-full bg-surface-variant rounded-full overflow-hidden"
+                  >
+                    <div class="h-full w-3/4 bg-primary"></div>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-surface-variant rounded-full overflow-hidden"
+                  >
+                    <div class="h-full w-1/2 bg-secondary"></div>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-surface-variant rounded-full overflow-hidden"
+                  >
+                    <div class="h-full w-5/6 bg-tertiary"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Code & Tech Section -->
+    <section class="py-24 bg-surface overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-4xl font-bold font-space-grotesk mb-6">
+              Developer First Architecture
+            </h2>
+            <p class="text-on-surface-variant mb-8">
+              A scalable and modular architecture designed for real-time urban heat prediction. 
+  The system integrates weather APIs, machine learning models, and interactive dashboards 
+  to deliver fast, reliable, and actionable heat intelligence.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-10">
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >STREAMLIT</span
+              >
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >PYTHON</span
+              >
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >SCIKIT-LEARN</span
+              >
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >OPENWEATHER</span
+              >
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >SQLITE</span
+              >
+              <span
+                class="px-3 py-1 bg-surface-variant rounded-md text-[10px] font-bold tracking-widest border border-outline-variant/20"
+                >PLOTLY</span
+              >
+            </div>
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <span class="material-symbols-outlined text-tertiary"
+                  >bolt</span
+                >
+                <div>
+                  <h5 class="font-bold">Real-Time Data Processing</h5>
+                  <p class="text-sm text-on-surface-variant">
+                    Efficiently fetches and processes live weather data from multiple sources 
+  to ensure accurate and up-to-date predictions.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <span class="material-symbols-outlined text-tertiary"
+                  >memory</span
+                >
+                <div>
+                  <h5 class="font-bold">Optimized Performance</h5>
+                  <p class="text-sm text-on-surface-variant">
+                    Smart caching techniques reduce computation time and improve performance 
+  for repeated spatial and temporal queries.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary blur opacity-20"
+            ></div>
+            <div
+              class="relative bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-2xl"
+            >
+              <div
+                class="bg-surface-variant/50 px-4 py-2 flex items-center gap-2 border-b border-outline-variant/30"
+              >
+                <div class="flex gap-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-error-dim"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-tertiary-dim"></div>
+                </div>
+                <span class="text-[10px] font-mono text-on-surface-variant"
+                  >predict_model.py</span
+                >
+              </div>
+              <pre
+                class="p-6 text-sm font-mono leading-relaxed overflow-x-auto"
+              ><span class="text-secondary">import</span> joblib
+<span class="text-secondary">import</span> pandas <span class="text-secondary">as</span> pd
+
+<span class="text-outline"># Load pre-trained neural ensemble</span>
+model = joblib.load(<span class="text-primary">'urban_heat_ensemble_v2.pkl'</span>)
+
+<span class="text-secondary">def</span> <span class="text-tertiary">predict_thermal_risk</span>(coords, weather_data):
+    features = preprocess(coords, weather_data)
+    <span class="text-outline"># Parallel inference call</span>
+    prediction = model.predict(features)
+    
+    <span class="text-secondary">return</span> {
+        <span class="text-primary">"intensity"</span>: prediction[<span class="text-primary">0</span>],
+        <span class="text-primary">"risk_level"</span>: calculate_risk(prediction[<span class="text-primary">0</span>]),
+        <span class="text-primary">"timestamp"</span>: pd.Timestamp.now()
+    }</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Final CTA -->
+    <section
+      class="py-24 bg-surface-container-lowest text-center relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/5 blur-[120px] rounded-full"
+      ></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-black font-space-grotesk mb-8">
+          Ready to Optimize Your City?
+        </h2>
+        <p class="text-on-surface-variant max-w-xl mx-auto mb-10 text-lg">
+          Empowering urban planners, researchers, and communities with AI-driven insights 
+  to predict, analyze, and mitigate urban heat effectively.
+        </p>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer
+      class="bg-black w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-outline-variant/10"
+    >
+      <div class="flex flex-col gap-2">
+        <div
+          class="text-lg font-black text-slate-200 font-space-grotesk tracking-tighter"
+        >
+          Urban Heat Intelligence System
+        </div>
+        <p class="text-slate-500 font-inter text-xs tracking-widest uppercase">
+          © 2026 All rights reserved.
+        </p>
+      </div>
+      <div
+        class="flex items-center gap-8 font-inter text-xs tracking-widest uppercase text-slate-500"
+      >
+        <a
+          class="hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100"
+          href="https://github.com/Rashid075/Urban_Heat_Mitigation_System"
+          >GitHub</a
+        >
+        <a
+          class="hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100"
+          href="https://github.com/Rashid075/Urban_Heat_Mitigation_System"
+          >Contact</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

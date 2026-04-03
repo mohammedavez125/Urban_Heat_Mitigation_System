@@ -6,7 +6,7 @@ from datetime import datetime
 def create_live_map(df_live, model):
     map_obj = folium.Map(
         location=[17.3850, 78.4867],
-        zoom_start=12,
+        zoom_start=5,
         tiles="OpenStreetMap"
     )
 

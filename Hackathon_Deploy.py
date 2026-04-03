@@ -83,15 +83,45 @@ if st.sidebar.button("Add Location"):
         st.session_state.zones[zone_name] = (lat, lon)
         st.cache_data.clear()
         st.sidebar.success("Saved to DB ✅")
+        
+
 
 # ==============================
 # FETCH DATA PARALLEL + SAVE
 # ==============================
+
+@st.cache_data(ttl=300)
+def get_live_data(zones):
+    results = []
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = [
+            executor.submit(fetch_weather, z, lat, lon)
+            for z, (lat, lon) in zones.items()
+        ]
+
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                results.append(result)
+                insert_weather(result)   # SAVE HISTORY
+
+    return pd.DataFrame(results)
+
 df_live = get_live_data(st.session_state.zones)
 
+st.write("Columns:", df_live.columns)
+st.write(df_live.head())
 # ==============================
 # HEAT RISK SCORE
 # ==============================
+def compute_heat_risk(df):
+    df["heat_risk"] = (
+        0.5 * df["temperature"] +
+        0.3 * df["humidity"] -
+        0.2 * df["wind_speed"]
+    )
+    return df
 df_live = compute_heat_risk(df_live)
 
 # ==============================
