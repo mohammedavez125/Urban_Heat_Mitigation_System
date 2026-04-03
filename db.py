@@ -67,6 +67,9 @@ def get_locations():
 
     conn.close()
 
+    if not rows:
+        return {}
+
     return {r[0]: (r[1], r[2]) for r in rows}
 
 

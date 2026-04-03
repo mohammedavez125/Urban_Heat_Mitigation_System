@@ -8,7 +8,7 @@ from datetime import datetime
 # ======================
 # IMPORT MODULES
 # ======================
-from db import *
+from db import init_db, get_locations, insert_location, insert_weather
 from utils.api import fetch_weather
 from utils.livemap import create_live_map
 from utils.zone_analysis import create_zone_analysis
@@ -136,7 +136,8 @@ init_db()
 # ======================
 # DEFAULT LOCATIONS
 # ======================
-if not get_locations():
+locations = get_locations()
+if not locations:
     default_locations = {
         "Hyderabad": (17.3850, 78.4867),
         "Mumbai": (19.0760, 72.8777),
