@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 
 def create_planning(df_live):
 
-    zone = st.selectbox("Select Zone", df_live["zone"])
+    zone = st.selectbox("Select Zone", df_live["zone"], key="zone_planning")
     row = df_live[df_live["zone"] == zone].iloc[0]
 
     trees = st.slider("Add Trees (%)", 0, 50, 10)

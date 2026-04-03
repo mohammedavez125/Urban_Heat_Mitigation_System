@@ -1,66 +1,164 @@
-# Urban Heat Intelligence System
+# 🌍 Urban Heat Intelligence System
 
-## Overview
+## 🚀 Overview
 
-The **Urban Heat Intelligence System** is a Streamlit-based application designed to analyze, visualize, and mitigate urban heat patterns. It integrates machine learning, geospatial insights, and live weather data to provide actionable intelligence for urban planning and environmental monitoring.
+The **Urban Heat Intelligence System** is an AI-powered platform designed to monitor, analyze, and mitigate urban heat patterns in real time. It integrates **machine learning, geospatial visualization, and live weather data** to provide actionable insights for urban planning and environmental sustainability.
 
----
+This system goes beyond basic analytics by offering:
 
-## Features
-
-* **Zone Analysis**: Evaluate heat distribution across different urban zones
-* **Live Map Visualization**: Real-time geospatial heat mapping
-* **Mitigation Planning**: Suggest strategies to reduce urban heat impact
-* **Ranking System**: Rank zones based on heat severity
-* **Planning Module**: Assist in long-term urban cooling strategies
-* **Historical Insights**: Track and analyze past heat trends
-* **ML Model Integration**: Predictive modeling using a trained weather model
+* 🔮 Predictive forecasting
+* 🔥 Heat risk detection
+* 🌿 Intelligent mitigation strategies
+* 📊 Explainable AI insights
 
 ---
 
-## Project Structure
+## 🧠 Key Capabilities
+
+* 📡 Real-time weather monitoring using OpenWeather API
+* 🤖 Multi-model machine learning pipeline
+* 🌍 Interactive geospatial visualization
+* 📊 Explainable AI (SHAP-based insights)
+* 🔮 Future temperature forecasting
+* 🚨 High-risk heat alerts
+
+---
+
+## ✨ Features
+
+### 📊 Dashboard
+
+* KPI cards (temperature, humidity, wind)
+* Heat distribution visualization
+* High-risk zone alerts
+
+### 🗺 Live Map
+
+* Interactive map with heat zones
+* Color-coded risk levels
+* Heatmap visualization
+
+### 📈 Zone Analysis
+
+* Live vs predicted temperature
+* Heat risk scoring
+* 📊 AI-based explanation (SHAP)
+
+### 🌿 Mitigation Module
+
+* Simulates cooling strategies:
+
+  * Urban forests 🌳
+  * Cool roofs 🏠
+  * Wind corridors 🌬
+* Recommends best solution
+
+### 🏆 Ranking System
+
+* Ranks zones based on heat severity
+
+### 📜 Historical Analysis
+
+* Tracks past temperature trends
+* Time-based visualization
+
+### 🏗 Planning Module
+
+* Simulates long-term urban interventions
+
+### 🔮 Forecast Module
+
+* Predicts next 3 hours temperature
+* Trend visualization
+
+### ➕ Add Location
+
+* Add custom zones dynamically
+
+---
+
+## 🤖 Machine Learning Models
+
+| Model          | Type           | Purpose                   |
+| -------------- | -------------- | ------------------------- |
+| XGBoost        | Regression     | Temperature prediction    |
+| Random Forest  | Classification | Heatwave detection        |
+| KMeans         | Clustering     | Hotspot identification    |
+| Strategy Model | Classification | Mitigation recommendation |
+
+---
+
+## 🧮 Heat Risk Formula
+
+```text
+Heat Risk = 0.5 × Temperature + 0.3 × Humidity − 0.2 × Wind Speed
+```
+
+---
+
+## 🏗 Project Architecture
+
+```
+Locations → Weather API → Database → Feature Engineering → ML Models → Dashboard
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 .
 ├── .streamlit/
-│   └── secrets.toml        # API keys and secrets
-├── notebooks/              # Jupyter notebook for training
+│   └── secrets.toml
+├── pages
+    └── index.html
+├── notebooks/
+    └── Urban_Heat_Mitigation (2).ipynb
 ├── utils/
-│   ├── util.py
+│   ├── api.py
+|   ├── features.py
+|   ├── grid.py
 │   ├── zone_analysis.py
 │   ├── livemap.py
 │   ├── mitigation.py
 │   ├── ranking.py
 │   ├── planning.py
 │   └── history.py
-├── db.py                   # Database initialization and management
-├── app.py     # Main Streamlit application
-├── weather_model_updated.pkl
+├── db.py
+├── app.py
+├── xgb_model.pkl
+├── heatwave_model.pkl
+├── kmeans_model.pkl
+├── strategy_model.pkl
+├── label_encoder.pkl
 ├── urban_heat.db
 ├── requirements.txt
-├── runtime.txt
 └── README.md
 ```
 
 ---
 
-## Installation
+## ⚙️ Installation
 
-### 1. Clone the Repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/mohammedavez125/Urban_Heat_Mitigation_System
 cd Urban_Heat_Mitigation_System
 ```
 
-### 2. Create Virtual Environment
+---
+
+### 2️⃣ Create Virtual Environment
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+---
+
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -68,22 +166,16 @@ pip install -r requirements.txt
 
 ---
 
-## API Key Setup (OpenWeather)
+## 🔑 API Setup (OpenWeather)
 
-This project uses the OpenWeather API for real-time weather data.
+### Step 1: Get API Key
 
-### Step 1: Generate API Key
+* Visit: https://home.openweathermap.org/
+* Generate API key
 
-1. Go to: https://home.openweathermap.org/
-2. Sign up / log in
-3. Navigate to **API Keys**
-4. Copy your API key
+### Step 2: Add to Secrets
 
----
-
-### Step 2: Store API Key
-
-Create the file:
+Create file:
 
 ```
 .streamlit/secrets.toml
@@ -97,61 +189,7 @@ API_KEY = "your_api_key_here"
 
 ---
 
-## Optional: Windows Automation for API Key Setup
-
-You can automate the creation of the secrets file using a Windows script.
-
-### Option 1: Batch Script
-
-Create a file named `setup_secrets.bat`:
-
-```bat
-@echo off
-set /p API_KEY=Enter your OpenWeather API Key: 
-
-if not exist .streamlit (
-    mkdir .streamlit
-)
-
-echo API_KEY = "%API_KEY%" > .streamlit\secrets.toml
-
-echo Secrets file created successfully.
-pause
-```
-
-Run:
-
-```bash
-setup_secrets.bat
-```
-
----
-
-### Option 2: PowerShell Script
-
-Create `setup_secrets.ps1`:
-
-```powershell
-$apiKey = Read-Host "Enter your OpenWeather API Key"
-
-if (!(Test-Path ".streamlit")) {
-    New-Item -ItemType Directory -Path ".streamlit"
-}
-
-"API_KEY = `"$apiKey`"" | Out-File ".streamlit/secrets.toml"
-
-Write-Host "Secrets file created successfully."
-```
-
-Run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File setup_secrets.ps1
-```
-
----
-
-## Running the Application
+## ▶️ Run Application
 
 ```bash
 streamlit run app.py
@@ -159,18 +197,10 @@ streamlit run app.py
 
 ---
 
-## Model
+## 🗄 Database
 
-* File: `weather_model_updated.pkl`
-* Loaded using `joblib`
-* Used for predictive heat analysis
-
----
-
-## Database
-
-* SQLite database: `urban_heat.db`
-* Initialized automatically via:
+* SQLite: `urban_heat.db`
+* Auto-initialized via:
 
 ```python
 from db import *
@@ -179,45 +209,40 @@ init_db()
 
 ---
 
-## Dependencies
-
-Key libraries include:
+## 📦 Dependencies
 
 * streamlit
-* requests
 * pandas
-* folium
-* streamlit-folium
 * plotly
+* folium
+* scikit-learn
+* xgboost
+* shap
 * joblib
-* streamlit-option-menu
-* scikit-learn==1.6.1
-
-Install all dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
+* requests
 
 ---
 
-## Notes
+## 🚀 Future Improvements
 
-* Ensure your API key is valid and active before running the app
-* The `.streamlit/secrets.toml` file should not be committed to version control
-* Add `.streamlit/secrets.toml` to `.gitignore`
-
----
-
-## Future Improvements
-
-* Deployment on cloud platforms (Streamlit Cloud / AWS / Azure)
-* Integration with satellite heat data
-* Advanced ML models for higher prediction accuracy
-* User authentication and dashboards
+* 🌍 Satellite-based heat data integration
+* 📱 Mobile application interface
+* 🔔 Real-time alert notifications
+* 📊 Power BI integration
+* 🧠 AI chatbot for explanations
+* ⏱ 24-hour forecasting
 
 ---
 
-## License
+## 🧠 Key Highlights
 
-Specify your license here (e.g., MIT License)
+✔ Real-time + predictive system
+✔ Explainable AI integration
+✔ Multi-model architecture
+✔ Decision-support system
+
+---
+
+## 📜 License
+
+Add your license (MIT recommended)

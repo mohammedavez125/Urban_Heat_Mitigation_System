@@ -1,32 +1,37 @@
 import sqlite3
+from datetime import datetime
+import pandas as pd
 
 DB_NAME = "urban_heat.db"
 
-def get_conn():
-    return sqlite3.connect(DB_NAME)
-
+# ==============================
+# INIT DB (UPDATED)
+# ==============================
 def init_db():
-    conn = get_conn()
-    cur = conn.cursor()
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
 
-    # Zones table
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS zones (
-        name TEXT PRIMARY KEY,
+    # Locations table
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS locations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE,
         latitude REAL,
         longitude REAL
     )
     """)
 
-    # Weather history
-    cur.execute("""
+    # Weather history table (UPDATED)
+    c.execute("""
     CREATE TABLE IF NOT EXISTS weather_data (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         zone TEXT,
+        datetime TEXT,
+        latitude REAL,
+        longitude REAL,
         temperature REAL,
         humidity REAL,
-        wind_speed REAL,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        wind_speed REAL
     )
     """)
 
@@ -34,54 +39,88 @@ def init_db():
     conn.close()
 
 
-def insert_zone(name, lat, lon):
-    conn = get_conn()
-    cur = conn.cursor()
-    try:
-        cur.execute("INSERT INTO zones VALUES (?, ?, ?)", (name, lat, lon))
-        conn.commit()
-    except:
-        pass
-    conn.close()
+# ==============================
+# INSERT LOCATION
+# ==============================
+def insert_location(name, lat, lon):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
 
-
-def get_zones():
-    conn = get_conn()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM zones")
-    rows = cur.fetchall()
-    conn.close()
-    return {r[0]: (r[1], r[2]) for r in rows}
-
-
-def insert_weather(row):
-    conn = get_conn()
-    cur = conn.cursor()
-
-    cur.execute("""
-    INSERT INTO weather_data (zone, temperature, humidity, wind_speed)
-    VALUES (?, ?, ?, ?)
-    """, (row["zone"], row["temperature"], row["humidity"], row["wind_speed"]))
+    c.execute("""
+    INSERT OR IGNORE INTO locations (name, latitude, longitude)
+    VALUES (?, ?, ?)
+    """, (name, lat, lon))
 
     conn.commit()
     conn.close()
 
 
-def get_history(zone):
-    conn = get_conn()
-    cur = conn.cursor()
-    cur.execute("""
-    SELECT temperature, humidity, wind_speed, timestamp
-    FROM weather_data WHERE zone=? ORDER BY timestamp DESC LIMIT 50
-    """, (zone,))
-    data = cur.fetchall()
-    conn.close()
-    return data
+# ==============================
+# GET LOCATIONS
+# ==============================
+def get_locations():
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
 
-def get_complete_history():
-    conn = get_conn()
-    cur = conn.cursor()
-    cur.execute("""SELECT zone,temperature, humidity, wind_speed, timestamp FROM weather_data""")
-    data = cur.fetchall()
+    c.execute("SELECT name, latitude, longitude FROM locations")
+    rows = c.fetchall()
+
     conn.close()
-    return data
+
+    return {r[0]: (r[1], r[2]) for r in rows}
+
+
+# ==============================
+# INSERT WEATHER (UPDATED)
+# ==============================
+def insert_weather(data):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+
+    c.execute("""
+    INSERT INTO weather_data
+    (zone, datetime, latitude, longitude, temperature, humidity, wind_speed)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (
+        data["zone"],  # 🔥 IMPORTANT
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        data["latitude"],
+        data["longitude"],
+        data["temperature"],
+        data["humidity"],
+        data["wind_speed"]
+    ))
+
+    conn.commit()
+    conn.close()
+
+
+# ==============================
+# GET HISTORY (FOR UI)
+# ==============================
+def get_history(zone):
+    conn = sqlite3.connect(DB_NAME)
+
+    query = """
+    SELECT temperature, humidity, wind_speed, datetime
+    FROM weather_data
+    WHERE zone = ?
+    ORDER BY datetime ASC
+    """
+
+    df = pd.read_sql(query, conn, params=(zone,))
+    conn.close()
+
+    return df
+
+
+# ==============================
+# GET COMPLETE HISTORY
+# ==============================
+def get_complete_history():
+    conn = sqlite3.connect(DB_NAME)
+
+    df = pd.read_sql("SELECT * FROM weather_data", conn)
+    conn.close()
+
+    return df
