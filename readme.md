@@ -1,6 +1,13 @@
-# 🌍 Urban Heat Intelligence System
+## 🌍 Urban Heat Intelligence System
+Urban Heat Intelligence System project for Hackfusion2k26
 
-## 🚀 Overview
+## 👥 Team - Trinity 
+[@mohammedavez125](https://github.com/mohammedavez125) <br />
+[@Rashid075](https://github.com/Rashid075) <br />
+[@BhuvaneshNeerati](https://github.com/BhuvaneshNeerati) 
+
+
+## Overview
 
 The **Urban Heat Intelligence System** is an AI-powered platform designed to monitor, analyze, and mitigate urban heat patterns in real time. It integrates **machine learning, geospatial visualization, and live weather data** to provide actionable insights for urban planning and environmental sustainability.
 
@@ -240,9 +247,3 @@ init_db()
 ✔ Explainable AI integration
 ✔ Multi-model architecture
 ✔ Decision-support system
-
----
-
-## 📜 License
-
-Add your license (MIT recommended)
